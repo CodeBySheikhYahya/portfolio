@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { fadeInUp, staggerContainer, viewportOnce } from "@/lib/animations";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { Button } from "@/components/ui/Button";
+import Image from "next/image";
 import { useState } from "react";
 
 const filters = ["All", "Cloud Migration", "Custom Software", "Cybersecurity", "AI & Data"];
@@ -18,6 +19,11 @@ const cases = [
     stats: ["42% cost saved", "90 days"],
     statsColor: "text-accent-green",
     featured: true,
+    image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80",
+    metrics: [
+      { value: "42%", label: "Cost saved", color: "text-accent" },
+      { value: "90 days", label: "Migration", color: "text-text" },
+    ],
   },
   {
     tag: "AI & DATA",
@@ -103,37 +109,80 @@ export default function CaseStudiesPage() {
             viewport={viewportOnce}
             className="grid grid-cols-1 md:grid-cols-2 gap-6"
           >
-            {filtered.map((c) => (
-              <motion.div
-                key={c.title}
-                variants={fadeInUp}
-                className={`rounded-2xl bg-bg-card border border-border p-8 flex flex-col gap-4 transition-all duration-300 hover:border-accent/25 hover:shadow-[0_8px_32px_0_rgba(236,60,7,0.06)] ${
-                  c.featured ? "md:col-span-2" : ""
-                }`}
-              >
-                <span
-                  className={`font-mono text-[11px] tracking-[2px] uppercase ${c.tagColor}`}
+            {filtered.map((c) =>
+              c.featured ? (
+                <motion.div
+                  key={c.title}
+                  variants={fadeInUp}
+                  className="md:col-span-2 rounded-2xl bg-bg-card border border-border overflow-hidden flex flex-col md:flex-row h-auto md:h-[280px] transition-all duration-300 hover:border-accent/25 hover:shadow-[0_8px_32px_0_rgba(236,60,7,0.06)]"
                 >
-                  {c.tag}
-                </span>
-                <h3 className="font-heading font-bold text-xl md:text-2xl text-text leading-snug">
-                  {c.title}
-                </h3>
-                <p className="text-text-muted text-sm leading-relaxed">
-                  {c.desc}
-                </p>
-                <div className="flex flex-wrap gap-4 mt-2">
-                  {c.stats.map((s) => (
+                  <div className="flex-1 p-8 flex flex-col gap-4">
                     <span
-                      key={s}
-                      className={`font-mono text-[13px] font-semibold ${c.statsColor}`}
+                      className={`font-mono text-[11px] tracking-[2px] uppercase ${c.tagColor}`}
                     >
-                      {s}
+                      {c.tag}
                     </span>
-                  ))}
-                </div>
-              </motion.div>
-            ))}
+                    <h3 className="font-heading font-bold text-[26px] text-text leading-[1.2]">
+                      {c.title}
+                    </h3>
+                    <p className="text-text-muted text-sm leading-relaxed">
+                      {c.desc}
+                    </p>
+                    <div className="flex gap-7 mt-auto">
+                      {c.metrics?.map((m) => (
+                        <div key={m.value} className="flex flex-col gap-0.5">
+                          <span
+                            className={`font-heading font-bold text-[28px] ${m.color}`}
+                          >
+                            {m.value}
+                          </span>
+                          <span className="text-text-muted text-[13px]">
+                            {m.label}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="relative w-full md:w-[380px] h-56 md:h-full shrink-0">
+                    <Image
+                      src={c.image!}
+                      alt={c.title}
+                      fill
+                      className="object-cover"
+                      sizes="380px"
+                    />
+                  </div>
+                </motion.div>
+              ) : (
+                <motion.div
+                  key={c.title}
+                  variants={fadeInUp}
+                  className="rounded-2xl bg-bg-card border border-border p-8 flex flex-col gap-4 transition-all duration-300 hover:border-accent/25 hover:shadow-[0_8px_32px_0_rgba(236,60,7,0.06)]"
+                >
+                  <span
+                    className={`font-mono text-[11px] tracking-[2px] uppercase ${c.tagColor}`}
+                  >
+                    {c.tag}
+                  </span>
+                  <h3 className="font-heading font-bold text-xl text-text leading-snug">
+                    {c.title}
+                  </h3>
+                  <p className="text-text-muted text-sm leading-relaxed">
+                    {c.desc}
+                  </p>
+                  <div className="flex flex-wrap gap-4 mt-2">
+                    {c.stats.map((s) => (
+                      <span
+                        key={s}
+                        className={`font-mono text-[13px] font-semibold ${c.statsColor}`}
+                      >
+                        {s}
+                      </span>
+                    ))}
+                  </div>
+                </motion.div>
+              )
+            )}
           </motion.div>
         </div>
       </section>

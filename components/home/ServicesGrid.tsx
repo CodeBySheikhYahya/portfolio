@@ -6,25 +6,25 @@ import { SectionHeader } from "@/components/ui/SectionHeader";
 
 const services = [
   {
-    icon: "☁️",
+    iconColor: "bg-accent/20",
     title: "Cloud Infrastructure",
     description:
       "Migrate, optimize and secure your cloud workloads on AWS, Azure or GCP with zero downtime.",
   },
   {
-    icon: "💻",
+    iconColor: "bg-accent-coral/20",
     title: "Custom Software",
     description:
       "Bespoke web, mobile and enterprise apps built with modern stacks and delivered on schedule.",
   },
   {
-    icon: "🛡️",
+    iconColor: "bg-accent-green/20",
     title: "Cybersecurity",
     description:
       "End-to-end security audits, SOC 2 compliance, and 24/7 threat monitoring to protect your assets.",
   },
   {
-    icon: "🤖",
+    iconColor: "bg-accent-gold/20",
     title: "AI & Data Solutions",
     description:
       "Build ML pipelines, predictive analytics and AI-powered automation tailored to your industry.",
@@ -48,19 +48,23 @@ export function ServicesGrid() {
           viewport={viewportOnce}
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-14"
         >
-          {services.map((svc) => (
+          {services.map((svc, i) => (
             <motion.div
               key={svc.title}
               variants={fadeInUp}
-              className="group rounded-xl bg-bg-card border border-border p-8 flex flex-col gap-5 transition-all duration-300 hover:border-accent/25 hover:shadow-[0_8px_40px_0_rgba(236,60,7,0.08)] cursor-pointer"
+              className={`group rounded-xl border p-8 flex flex-col gap-5 transition-all duration-300 cursor-pointer ${
+                i === 0
+                  ? "bg-[#FFF8F5] border-accent/20 shadow-[0_8px_40px_0_rgba(236,60,7,0.08)]"
+                  : "bg-bg-card border-border hover:border-accent/25 hover:shadow-[0_8px_40px_0_rgba(236,60,7,0.08)]"
+              }`}
             >
-              <div className="w-12 h-12 rounded-lg bg-accent/8 border border-accent/15 flex items-center justify-center text-2xl">
-                {svc.icon}
-              </div>
-              <h3 className="font-heading font-bold text-xl text-text">
+              <div
+                className={`w-12 h-12 rounded-[10px] ${svc.iconColor}`}
+              />
+              <h3 className="font-heading font-semibold text-[22px] text-text">
                 {svc.title}
               </h3>
-              <p className="text-text-muted text-sm leading-relaxed">
+              <p className="text-text-muted text-[15px] leading-relaxed">
                 {svc.description}
               </p>
             </motion.div>

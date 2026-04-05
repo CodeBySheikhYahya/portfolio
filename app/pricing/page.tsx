@@ -127,12 +127,16 @@ export default function PricingPage() {
                 </h3>
                 <p className="text-text-muted text-sm mt-2">{p.desc}</p>
               </div>
-              <div>
-                <span className="font-heading font-bold text-4xl text-accent">
-                  {p.price}
+              <div className="flex items-end gap-1">
+                <span className="font-heading font-bold text-[32px] text-text">
+                  Starting at{" "}
+                  <span className="text-accent">{p.price}</span>
                 </span>
-                <span className="text-text-muted text-sm ml-1">{p.unit}</span>
+                <span className="text-text-muted text-[15px] mb-1">
+                  {p.unit}
+                </span>
               </div>
+              <div className="h-px bg-border w-full" />
               <ul className="flex flex-col gap-3">
                 {p.features.map((f) => (
                   <li key={f} className="flex items-center gap-2.5">
@@ -141,13 +145,16 @@ export default function PricingPage() {
                   </li>
                 ))}
               </ul>
-              <Button
+              <a
                 href="/contact"
-                variant={p.popular ? "primary" : "secondary"}
-                className="w-full mt-auto"
+                className={`w-full text-center rounded-lg py-3 text-sm font-semibold transition-colors ${
+                  p.popular
+                    ? "bg-accent hover:bg-accent-hover text-white"
+                    : "bg-[#F5F5F0] hover:bg-white text-text border border-border"
+                }`}
               >
                 {p.cta}
-              </Button>
+              </a>
             </motion.div>
           ))}
         </motion.div>

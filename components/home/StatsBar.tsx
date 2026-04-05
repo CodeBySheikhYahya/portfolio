@@ -45,12 +45,12 @@ function AnimatedStat({ value, suffix, prefix = "", label, color }: StatProps) {
 
   return (
     <div ref={ref} className="flex flex-col items-center gap-2">
-      <span className={`font-heading font-bold text-4xl md:text-5xl ${color}`}>
+      <span className={`font-heading font-bold text-4xl md:text-[52px] ${color}`}>
         {prefix}
         {display}
         {suffix}
       </span>
-      <span className="text-text-muted text-sm text-center">{label}</span>
+      <span className="text-text-muted text-[15px] text-center max-w-[180px]">{label}</span>
     </div>
   );
 }
@@ -61,7 +61,7 @@ const stats = [
     prefix: "$",
     suffix: "B+",
     label: "Revenue Generated for Clients",
-    color: "text-accent-green",
+    color: "text-accent",
   },
   {
     value: 500,
@@ -73,7 +73,7 @@ const stats = [
     value: 99.9,
     suffix: "%",
     label: "Uptime SLA Guaranteed",
-    color: "text-accent",
+    color: "text-accent-coral",
   },
   {
     value: 15,
@@ -90,7 +90,7 @@ export function StatsBar() {
       whileInView={{ opacity: 1 }}
       viewport={viewportOnce}
       transition={{ duration: 0.6 }}
-      className="w-full py-20 bg-bg-alt"
+      className="w-full py-20 bg-white"
     >
       <div className="max-w-[1440px] mx-auto px-5 md:px-10 xl:px-16 grid grid-cols-2 lg:grid-cols-4 gap-10">
         {stats.map((s) => (

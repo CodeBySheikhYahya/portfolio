@@ -92,10 +92,10 @@ export function Testimonials() {
                   key={t.name}
                   className="rounded-xl bg-bg-card border border-border p-8 flex flex-col gap-5 transition-all duration-300 hover:border-accent/25 hover:shadow-[0_6px_24px_0_rgba(236,60,7,0.06)]"
                 >
-                  <div className="flex gap-0.5 text-accent-gold text-sm">
+                  <div className="flex gap-0.5 text-accent-gold text-base">
                     {"★".repeat(t.stars)}
                   </div>
-                  <p className="text-text-body text-sm leading-relaxed italic">
+                  <p className="text-text-body text-base leading-[1.7]">
                     &ldquo;{t.quote}&rdquo;
                   </p>
                   <div className="flex items-center gap-3 mt-auto">
